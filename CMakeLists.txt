@@ -3,9 +3,6 @@ cmake_minimum_required(VERSION 3.5) #Проверка версии CMake.
 set(PROJECT_NAME All_labs) #Создаем обычную локальную переменную с именем проекта
 project(${PROJECT_NAME}) # Название проекта
 
-set(sample sample) #Переменная с именем приложения
-set(includessrc includessrc) #Переменная с именем библиотеки
-set(test test)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
@@ -14,12 +11,7 @@ endif()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 add_subdirectory(gtest)
 
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/STACK/includessrc) 
-add_subdirectory(STACK/includessrc)
-#${CMAKE_CURRENT_SOURCE_DIR} - стандартная переменная с адресом рабочей директории
-add_subdirectory(STACK/samples)
-add_subdirectory(STACK/test)
+add_subdirectory(STACK)
 
 
 
