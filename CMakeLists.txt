@@ -12,6 +12,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 add_subdirectory(gtest)
 
 add_subdirectory(STACK)
+add_subdirectory(QUEUE)
+add_subdirectory(ArithmExpression)
 
 
 
