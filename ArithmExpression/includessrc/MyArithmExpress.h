@@ -17,10 +17,9 @@ public:
         infix(infx),
         st(infx.length()), // Инициализация стека символов с размером входной строки
         st2(infx.length()) { // Инициализация стека чисел, размер можно скорректировать
-        priority = { {'+', 1}, {'-', 1}, {'*', 2}, {'/', 2} };
+        priority = { {'(', 1},{')', 1}, {'+', 2}, {'-', 2}, {'*', 3}, {'/', 3}};
         ToPostfix();
     }
-
     string GetInfix() const {
         return infix;
     }
@@ -29,19 +28,23 @@ public:
     }
 
     void ToPostfix() {
+        st.Clear();
         postfix = "";
-        postfix.reserve(infix.length() * 2); // Оптимизация работы со строками
         string src = "(" + infix + ")";
         char elem;
         unsigned int i = 0;
         while (i < src.size()) {
+            postfix += " ";
             if (src[i] >= '0' && src[i] <= '9' || src[i] == '.') {
                 postfix += src[i];
             }
             else if (src[i] == '+' || src[i] == '-' || src[i] == '*' || src[i] == '/') {
-                while (!st.IsEmpty() && priority[st.Top()] >= priority[src[i]]) {
-                    postfix += st.Pop();
+                elem = st.Pop();
+                while (priority[elem] >= priority[src[i]]) {
+                    postfix += elem;
+                    elem = st.Pop();
                 }
+                st.Push(elem);
                 st.Push(src[i]);
             }
             else if (src[i] == '(') {
@@ -59,6 +62,7 @@ public:
     }
 
     double Calculate() {
+        st2.Clear();
         unsigned int i = 0;
         while (i < postfix.size()) {
             if (postfix[i] == '+' || postfix[i] == '-' || postfix[i] == '*' || postfix[i] == '/') {
