@@ -1,4 +1,4 @@
-set(sample sample_queue) #Переменная с именем приложения
+set(sample sample_queue) #Переменная с именем приложения ok
 set(includessrc includessrc_queue) #Переменная с именем библиотеки
 set(test test_queue)
 

@@ -17,7 +17,7 @@ add_subdirectory(ArithmExpression)
 
 
 
-#file(GLOB hdrs "*.h*") #Добавляем в переменную hdrs все файлы с расширением .h
+#file(GLOB hdrs "*.h*") #Добавляем в переменную hdrs всее файлы с расширением .h  
 #file(GLOB srcs "*.cpp") #Добавляем в переменную srcs все файлы с расширением .cpp
 
 #include_directories(lib1)
