@@ -16,32 +16,32 @@ TEST(TStack, copy_constructor) {
     stack1.Push(1);
     stack1.Push(2);
     TStack<int> stack2(stack1);
-    EXPECT_EQ(stack2.Pop(), 2); // Изменено с Get() на Pop()
-    EXPECT_EQ(stack2.Pop(), 1); // Изменено с Get() на Pop()
+    EXPECT_EQ(stack2.Pop(), 2); 
+    EXPECT_EQ(stack2.Pop(), 1); 
 }
 
 TEST(TStack, push_element) {
     TStack<int> stack;
     ASSERT_NO_THROW(stack.Push(1));
-    EXPECT_EQ(stack.Top(), 1); // Изменено с TopView() на Top()
+    EXPECT_EQ(stack.Top(), 1); 
 }
 
-TEST(TStack, pop_element) { // Изменено название теста с get_element
+TEST(TStack, pop_element) { 
     TStack<int> stack;
     stack.Push(1);
     int res;
-    ASSERT_NO_THROW(res = stack.Pop()); // Изменено с Get() на Pop()
+    ASSERT_NO_THROW(res = stack.Pop());
     EXPECT_EQ(res, 1);
 }
 
-TEST(TStack, pop_empty_stack) { // Изменено название теста с get_empty_stack
+TEST(TStack, pop_empty_stack) { 
     TStack<int> stack;
-    ASSERT_ANY_THROW(stack.Pop()); // Изменено с Get() на Pop()
+    ASSERT_ANY_THROW(stack.Pop()); 
 }
 
-TEST(TStack, top_empty_stack) { // Изменено название теста с top_view_empty_stack
+TEST(TStack, top_empty_stack) { 
     TStack<int> stack;
-    ASSERT_ANY_THROW(stack.Top()); // Изменено с TopView() на Top()
+    ASSERT_ANY_THROW(stack.Top()); 
 }
 
 TEST(TStack, push_full_stack) {
@@ -50,10 +50,10 @@ TEST(TStack, push_full_stack) {
     ASSERT_ANY_THROW(stack.Push(2));
 }
 
-TEST(TStack, top_element) { // Изменено название теста с top_view_element
+TEST(TStack, top_element) { 
     TStack<int> stack;
     stack.Push(25);
-    EXPECT_EQ(stack.Top(), 25); // Изменено с TopView() на Top()
+    EXPECT_EQ(stack.Top(), 25); 
 }
 
 TEST(TStack, check_is_full) {
@@ -69,7 +69,7 @@ TEST(TStack, check_is_empty) {
     EXPECT_TRUE(stack.IsEmpty());
     stack.Push(1);
     EXPECT_FALSE(stack.IsEmpty());
-    stack.Pop(); // Изменено с Get() на Pop()
+    stack.Pop(); 
     EXPECT_TRUE(stack.IsEmpty());
 }
 TEST(TStack, operator_assign) {
@@ -78,6 +78,6 @@ TEST(TStack, operator_assign) {
     stack1.Push(2);
     TStack<int> stack2;
     ASSERT_NO_THROW(stack2 = stack1);
-    EXPECT_EQ(stack2.Pop(), 2); // Изменено с Get() на Pop()
-    EXPECT_EQ(stack2.Pop(), 1); // Изменено с Get() на Pop()
+    EXPECT_EQ(stack2.Pop(), 2); 
+    EXPECT_EQ(stack2.Pop(), 1); 
 }

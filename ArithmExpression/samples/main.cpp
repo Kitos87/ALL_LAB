@@ -1,6 +1,6 @@
 #include<iostream>
 #include<string>
-#include"MyArithmExpress.h" // Убедитесь, что путь к заголовочному файлу правильный
+#include"MyArithmExpress.h" 
 
 using namespace std;
 
@@ -10,17 +10,16 @@ int main() {
     cout << expr << endl;
 
     try {
-        TArithmeticExpression calc(expr); // Создание объекта для вычисления арифметического выражения
+        TArithmeticExpression calc(expr); 
 
         cout << "Postfix expression: " << endl;
-        cout << calc.GetPostfix() << endl; // Вывод постфиксного выражения
+        cout << calc.GetPostfix() << endl;
 
         cout << "Calculated result: " << endl;
-        cout << calc.Calculate() << endl; // Вывод результата вычисления выражения
+        cout << calc.Calculate() << endl; 
     }
     catch (const exception& e) {
         cerr << "Error: " << e.what() << endl;
     }
-
     return 0;
 }
