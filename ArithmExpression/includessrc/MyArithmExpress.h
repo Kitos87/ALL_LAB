@@ -1,4 +1,4 @@
-#include<iostream>
+﻿#include<iostream>
 #include<vector>
 #include<map>
 #include<string>
@@ -15,7 +15,7 @@ class TArithmeticExpression {
 
 public:
     TArithmeticExpression(string infx) : infix(infx), st(infx.length()), st2(infx.length()) { 
-        priority = { {'(', 1},{')', 1}, {'+', 2}, {'-', 2}, {'*', 3}, {'/', 3}, {'s', 4}, {'c', 4}};
+        priority = { {'(', 1},{')', 1}, {'+', 2}, {'-', 2}, {'*', 3}, {'/', 3}, {'s', 4}, {'c', 4}, {'r', 4},{'^', 5}};
         ToPostfix();
     }
     string GetInfix() const {
@@ -38,7 +38,7 @@ public:
                 postfix += " ";
                 continue;
             }
-            else if (src[i] == '+' || src[i] == '-' || src[i] == '*' || src[i] == '/') {
+            else if (src[i] == '+' || src[i] == '-' || src[i] == '*' || src[i] == '/' || src[i] == '^') {
                 elem = st.Pop();
                 while (priority[elem] >= priority[src[i]]) {
                     postfix += elem;
@@ -66,6 +66,9 @@ public:
             else if (src[i] == 'c') { 
                 st.Push('c'); 
                 i += 2; 
+            }
+            else if (src[i] == 'r') {
+                st.Push(src[i]);
             }
             i++;
         }
@@ -110,6 +113,17 @@ public:
                 value = value * M_PI / 180.0;
                 st2.Push(cos(value));
                 i++; 
+            }
+            else if (postfix[i] == 'r') {
+                double value = st2.Pop();
+                st2.Push(sqrt(value));
+                i++;
+            }
+            else if (postfix[i] == '^') {
+                double exponent = st2.Pop();
+                double base = st2.Pop();
+                st2.Push(pow(base, exponent)); 
+                i++;
             }
             i++;
         }

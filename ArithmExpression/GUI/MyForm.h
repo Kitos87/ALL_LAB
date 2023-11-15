@@ -17,6 +17,16 @@ namespace CppWinForm1 {
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
+	private: System::Windows::Forms::Button^ btnCalculate;
+
+	private: System::Windows::Forms::TextBox^ txtInfixExpression;
+	private: System::Windows::Forms::Label^ lblInfix;
+	private: System::Windows::Forms::Label^ lblPostfix;
+	private: System::Windows::Forms::Label^ lblCalculated;
+
+
+
+
 	public:
 		MyForm(void)
 		{
@@ -32,22 +42,17 @@ namespace CppWinForm1 {
 		/// </summary>
 		~MyForm()
 		{
-			if (components)
+			/*if (components)
 			{
 				delete components;
-			}
+			}*/
 		}
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
-		TextBox^ txtInfixExpression;
-		Label^ lblInfix;
-		Label^ lblPostfix;
-		Label^ lblCalculated;
-		Button^ btnCalculate;
+		
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -57,52 +62,84 @@ namespace CppWinForm1 {
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(600, 250); 
-			this->Text = L"Expression Calculator";
-			this->Padding = System::Windows::Forms::Padding(0);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-
-			this->txtInfixExpression = gcnew TextBox();
-			this->txtInfixExpression->Location = System::Drawing::Point(20, 20); 
-			this->txtInfixExpression->Size = System::Drawing::Size(400, 30); 
-			this->txtInfixExpression->Font = gcnew System::Drawing::Font(L"Segoe UI", 10); 
-
-			this->btnCalculate = gcnew Button();
-			this->btnCalculate->Location = System::Drawing::Point(430, 20); 
-			this->btnCalculate->Size = System::Drawing::Size(140, 35); 
-			this->btnCalculate->Font = gcnew System::Drawing::Font(L"Segoe UI", 10);
+			this->btnCalculate = (gcnew System::Windows::Forms::Button());
+			this->txtInfixExpression = (gcnew System::Windows::Forms::TextBox());
+			this->lblInfix = (gcnew System::Windows::Forms::Label());
+			this->lblPostfix = (gcnew System::Windows::Forms::Label());
+			this->lblCalculated = (gcnew System::Windows::Forms::Label());
+			this->SuspendLayout();
+			// 
+			// btnCalculate
+			// 
+			this->btnCalculate->Location = System::Drawing::Point(313, 27);
+			this->btnCalculate->Name = L"btnCalculate";
+			this->btnCalculate->Size = System::Drawing::Size(109, 40);
+			this->btnCalculate->TabIndex = 0;
 			this->btnCalculate->Text = L"Enter expression";
+			this->btnCalculate->UseVisualStyleBackColor = true;
 			this->btnCalculate->Click += gcnew System::EventHandler(this, &MyForm::btnCalculate_Click);
-
-			this->lblInfix = gcnew Label();
-			this->lblInfix->Location = System::Drawing::Point(20, 60); 
-			this->lblInfix->Size = System::Drawing::Size(560, 30); 
-			this->lblInfix->Font = gcnew System::Drawing::Font(L"Segoe UI", 10);
-
-			this->lblPostfix = gcnew Label();
-			this->lblPostfix->Location = System::Drawing::Point(20, 100); 
-			this->lblPostfix->Size = System::Drawing::Size(560, 30); 
-			this->lblPostfix->Font = gcnew System::Drawing::Font(L"Segoe UI", 10);
-
-			this->lblCalculated = gcnew Label();
-			this->lblCalculated->Location = System::Drawing::Point(20, 140); 
-			this->lblCalculated->Size = System::Drawing::Size(560, 30); 
-			this->lblCalculated->Font = gcnew System::Drawing::Font(L"Segoe UI", 10);
-
+			// 
+			// txtInfixExpression
+			// 
+			this->txtInfixExpression->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->txtInfixExpression->Location = System::Drawing::Point(32, 29);
+			this->txtInfixExpression->Name = L"txtInfixExpression";
+			this->txtInfixExpression->Size = System::Drawing::Size(260, 34);
+			this->txtInfixExpression->TabIndex = 1;
+			// 
+			// lblInfix
+			// 
+			this->lblInfix->AutoSize = true;
+			this->lblInfix->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->lblInfix->Location = System::Drawing::Point(29, 84);
+			this->lblInfix->Name = L"lblInfix";
+			this->lblInfix->Size = System::Drawing::Size(53, 25);
+			this->lblInfix->TabIndex = 2;
+			this->lblInfix->Text = L"Infix:";
+			// 
+			// lblPostfix
+			// 
+			this->lblPostfix->AutoSize = true;
+			this->lblPostfix->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->lblPostfix->Location = System::Drawing::Point(29, 116);
+			this->lblPostfix->Name = L"lblPostfix";
+			this->lblPostfix->Size = System::Drawing::Size(76, 25);
+			this->lblPostfix->TabIndex = 3;
+			this->lblPostfix->Text = L"Postfix:";
+			// 
+			// lblCalculated
+			// 
+			this->lblCalculated->AutoSize = true;
+			this->lblCalculated->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->lblCalculated->Location = System::Drawing::Point(29, 145);
+			this->lblCalculated->Name = L"lblCalculated";
+			this->lblCalculated->Size = System::Drawing::Size(111, 25);
+			this->lblCalculated->TabIndex = 4;
+			this->lblCalculated->Text = L"Calculated:";
+			// 
+			// MyForm
+			// 
+			this->ClientSize = System::Drawing::Size(638, 302);
+			this->Controls->Add(this->lblCalculated);
+			this->Controls->Add(this->lblPostfix);
+			this->Controls->Add(this->lblInfix);
 			this->Controls->Add(this->txtInfixExpression);
 			this->Controls->Add(this->btnCalculate);
-			this->Controls->Add(this->lblInfix);
-			this->Controls->Add(this->lblPostfix);
-			this->Controls->Add(this->lblCalculated);
+			this->Name = L"MyForm";
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
 		}
 
-
-		void btnCalculate_Click(System::Object^ sender, System::EventArgs^ e) {
+		private: System::Void btnCalculate_Click(System::Object^ sender, System::EventArgs^ e) {
 			try {
-				// —читываем инфиксное выражение из TextBox
+
 				String^ infix = txtInfixExpression->Text;
-				// —оздаем экземпл€р класса дл€ работы с выражени€ми
+
 				TArithmeticExpression expression(msclr::interop::marshal_as<std::string>(infix));
 				std::string postfix = expression.GetPostfix();
 				double result = expression.Calculate();
@@ -114,7 +151,7 @@ namespace CppWinForm1 {
 				MessageBox::Show(ex->Message);
 			}
 		}
-	};
+};
 }
 
 #pragma endregion
