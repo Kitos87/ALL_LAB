@@ -2,85 +2,94 @@
 using namespace std;
 
 template <class T>
-class TQueue {
+class TQueue
+{
 protected:
-    int size;
-    int start;
-    int end;
-    int count;
-    T* mas;
+	T* mas;
+	int head, tail;
+	int count_elem;
+	int max_size;
 
 public:
-    TQueue(int _size = 1) {
-        if (_size <= 0) {
-            throw "Invalid size"; // Исключение для некорректного размера
-        }
-        size = _size;
-        start = 0;
-        end = 0;
-        count = 0;
-        mas = new T[size]();
-    }
+	TQueue(int size = 10) {
+		if (size < 0)
+			throw invalid_argument("Size must be greater than 0");
+		max_size = size;
+		mas = new T[max_size];
+		head = 0;
+		tail = -1;
+		count_elem = 0;
+	}
 
-    TQueue(const TQueue <T>& q) {
-        size = q.size;
-        start = q.start;
-        end = q.end;
-        count = q.count;
+	TQueue(const TQueue <T>& q) {
+		max_size = q.max_size;
+		head = q.head;
+		tail = q.tail;
+		count_elem = q.count_elem;
+		mas = new T[size];
+		for (int i = 0; i < count; ++i) {
+		    mas[(head + i) % max_size] = q.mas[(q.head + i) % max_size];
+		}
+	}
 
-        mas = new T[size];
-        for (int i = 0; i < count; ++i) {
-            mas[(start + i) % size] = q.mas[(q.start + i) % size];
-        }
-    }
+	~TQueue() {
+		delete[] mas;
+	}
 
-    ~TQueue() {
-        delete[] mas;
-    }
+	bool IsEmpty() {
+		return count_elem == 0;
+	}
 
-    void Push(T a) {
-        if (IsFull()) {
-            throw "Queue is full"; // Исключение для полной очереди
-        }
-        mas[end] = a;
-        end = (end + 1) % size; // Правильно обновляем end
-        count++;
-    }
+	bool IsFull() {
+		return count_elem == max_size;
+	}
 
-    T Get() {
-        if (IsEmpty()) {
-            throw "Queue is empty"; // Исключение для пустой очереди
-        }
-        T result = mas[start];
-        start = (start + 1) % size; // Правильно обновляем start
-        count--;
-        return result;
-    }
+	void Push(T el) {
+		tail = (tail + 1) % max_size;
+		if (!IsFull()) {
+			mas[tail] = el;
+			count_elem++;
+		}
+		else
+			throw "Queue is full";
+	}
 
-    int GetSize() const {
-        return size;
-    }
+	T Pop() {
+		if (!IsEmpty()) {
+			T res = mas[head];
+			head = (head + 1) % max_size;
+			count_elem--;
+			return res;
+		}
+		else
+			throw "Queue is empty";
+	}
 
-    bool IsFull() const {
-        return count == size;
-    }
+	int GetHead() {
+		return head;
+	}
 
-    bool IsEmpty() const {
-        return count == 0;
-    }
+	int GetMaxSize() {
+		return max_size;
+	}
 
-    TQueue& operator=(const TQueue& q) {
-        if (this != &q) {
-            delete[] mas;
-            size = q.size;
-            start = q.start;
-            end = q.end;
-            count = q.count;
-            mas = new T[size];
-            for (int i = 0; i < count; ++i) {
-                mas[(start + i) % size] = q.mas[(q.start + i) % size];
-            }
-        }
-        return *this;
-    }
+	int GetSize() {
+		return count_elem;
+	}
+
+	TQueue& operator=(const TQueue& q) {
+		if (this != &q) {
+		    delete[] mas;
+		    max_size = q.max_size;
+		    head = q.head;
+		    tail = q.tail;
+		    count_elem = q.count_elem;
+		    mas = new T[size];
+		    for (int i = 0; i < count_elem; ++i) {
+		        mas[(head + i) % max_size] = q.mas[(q.head + i) % max_size];
+		    }
+		}
+		return *this;
+	}
+
 };
